@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEndurance", "FluentEndurance\FluentEndurance.csproj", "{3CD5AE97-8754-448D-961D-9AE9509A4F2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CD5AE97-8754-448D-961D-9AE9509A4F2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CD5AE97-8754-448D-961D-9AE9509A4F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CD5AE97-8754-448D-961D-9AE9509A4F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CD5AE97-8754-448D-961D-9AE9509A4F2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30CF36B7-A47E-422D-AB01-D4480478D67D}
+	EndGlobalSection
+EndGlobal
