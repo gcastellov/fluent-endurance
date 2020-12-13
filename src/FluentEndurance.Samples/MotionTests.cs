@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 
 namespace FluentEndurance.Samples
 {
-    public class CarTests : BaseTest
+    public class MotionTests : BaseTest
     {
         private readonly AutopilotFeature _autopilotFeature;
         private readonly BrakesFeature _brakesFeature;
@@ -17,7 +17,7 @@ namespace FluentEndurance.Samples
         private readonly GearsFeature _gearsFeature;
         private readonly SteeringFeature _steeringFeature;
 
-        public CarTests(ITestOutputHelper output)
+        public MotionTests(ITestOutputHelper output)
             : base(services =>
             {
                 var notificationHandler = new StatusNotificationHandler();
@@ -34,7 +34,7 @@ namespace FluentEndurance.Samples
         }
 
         [Fact]
-        public Task CarSample()
+        public Task CarShouldMakeItsRoutineTwice()
             => UseFeatureSetGroup(Times.Being(2))
                 .WithSet(group => group.Create().As("Warm up")
                     .WithStep(_engineFeature, (engine, ct) => engine.Start(ct))
