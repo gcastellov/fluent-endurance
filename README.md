@@ -16,6 +16,14 @@ public Task EngineShouldStartAndStop()
             .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
         .Run();
 ```
+Which outputs:
+```
+Executed engine.Start(ct) taking 1007.4665 ms
+Executed engine.Stop(ct) taking 60.9244 ms
+Executed engine.Start(ct) taking 1002.506 ms
+Executed engine.Stop(ct) taking 58.2176 ms
+...
+```
 
 Another more completed sample.
 
