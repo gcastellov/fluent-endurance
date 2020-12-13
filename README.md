@@ -1,3 +1,5 @@
+![.NET Core](https://github.com/gcastellov/fluent-endurance/workflows/.NET%20Core/badge.svg)
+
 # fluent-endurance
 A fluent endurance automation framework.
 
@@ -25,7 +27,7 @@ Executed engine.Stop(ct) taking 58.2176 ms
 ...
 ```
 
-Another more completed sample.
+Another more complete sample.
 
 ```
 [Fact]
