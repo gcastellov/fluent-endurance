@@ -43,7 +43,7 @@ namespace FluentEndurance
 
         public async Task Run()
         {
-            for (var i = 0; i < _times; i++)
+            for (var i = 1; i <= _times; i++)
             {
                 await _mediator.Publish(new StatusNotification($"Running group for {i} times"));
 

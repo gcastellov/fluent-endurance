@@ -49,7 +49,7 @@ namespace FluentEndurance
 
         internal async Task Run()
         {
-            for (int i = 0; i < _times; i++)
+            for (int i = 1; i <= _times; i++)
             {
                 await _mediator.Publish(new StatusNotification($"Executing {_name} set for {i} times"));
 
