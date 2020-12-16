@@ -1,4 +1,5 @@
 ![.NET Core](https://github.com/gcastellov/fluent-endurance/workflows/.NET%20Core/badge.svg)
+![Publish NuGet](https://github.com/gcastellov/fluent-endurance/workflows/Publish%20NuGet/badge.svg?branch=main&event=push)
 
 # fluent-endurance
 A fluent endurance automation framework.
