@@ -1,0 +1,27 @@
+name: Publish NuGet
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore ./src/FluentEndurance.sln
+    - name: Build
+      run: dotnet build --configuration Release --no-restore ./src/FluentEndurance.sln
+    - name: Publish
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: ./src/FluentEndurance/FluentEndurance.csproj
+        PACKAGE_NAME: FluentEndurance
+        NUGET_KEY: ${{secrets.NUGET_PUBLISHER_KEY}}
