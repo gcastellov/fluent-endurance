@@ -15,17 +15,25 @@ namespace FluentEndurance
         private readonly IMediator _mediator;
         private string _name;
         private int _times;
+        private TimeSpan _during;
 
         public FeatureSet(IMediator mediator)
         {
             _mediator = mediator;
             _steps = new List<Step>();
             _times = Times.Once.Value;
+            _during = TimeSpan.Zero;
         }
 
         public FeatureSet For(Times times)
         {
             _times = times.Value;
+            return this;
+        }
+
+        public FeatureSet During(Time during)
+        {
+            _during = during.Value;
             return this;
         }
 
@@ -47,34 +55,57 @@ namespace FluentEndurance
             return this;
         }
 
-        internal async Task Run()
+        internal Task Run()
         {
-            for (int i = 1; i <= _times; i++)
+            return _during == TimeSpan.Zero
+                ? RunUsingTimes()
+                : RunUsingTimeSpan();
+        }
+
+        private async Task RunUsingTimeSpan()
+        {
+            var until = DateTime.UtcNow.Add(_during);
+
+            while (DateTime.UtcNow < until)
+            {
+                await _mediator.Publish(new StatusNotification($"Executing {_name} at {DateTime.UtcNow} times"));
+
+                await Execute();
+            }
+        }
+
+        private async Task RunUsingTimes()
+        {
+            for (var i = 1; i <= _times; i++)
             {
                 await _mediator.Publish(new StatusNotification($"Executing {_name} set for {i} times"));
 
-                var setStopWatch = new Stopwatch();
-                setStopWatch.Start();
-
-                foreach (var step in _steps)
-                {
-                    var stopWatch = new Stopwatch();
-                    stopWatch.Start();
-                    
-                    await step.Execute();
-                    
-                    stopWatch.Stop();
-
-                    var notification = new PerformanceStatusNotification(step.Name, stopWatch.Elapsed);
-                    step.AddNotification(notification);
-                    await _mediator.Publish(notification);
-                    
-                }
-
-                setStopWatch.Stop();
-
-                await _mediator.Publish(new PerformanceStatusNotification(_name, setStopWatch.Elapsed));
+                await Execute();
             }
+        }
+
+        private async Task Execute()
+        {
+            var setStopWatch = new Stopwatch();
+            setStopWatch.Start();
+
+            foreach (var step in _steps)
+            {
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
+
+                await step.Execute();
+
+                stopWatch.Stop();
+
+                var notification = new PerformanceStatusNotification(step.Name, stopWatch.Elapsed);
+                step.AddNotification(notification);
+                await _mediator.Publish(notification);
+            }
+
+            setStopWatch.Stop();
+
+            await _mediator.Publish(new PerformanceStatusNotification(_name, setStopWatch.Elapsed));
         }
     }
 }

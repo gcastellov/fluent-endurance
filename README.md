@@ -7,7 +7,7 @@ A fluent endurance automation framework.
 ## Samples
 For the sake of providing some examples, the solution contains set of tests which simulates certain car features.
 
-In the following snippet the engine must start within 1200 ms and stop within 800 ms. If any of these two operation reach the timing the execution fails. This set of operation will repeat for 50 times. 
+In the following snippet the engine must start within 1200 ms and stop within 800 ms. If any of these two operation reach the timing the execution fails. This set of operations will repeat for 50 times. 
 
 ```
 [Fact]
@@ -25,6 +25,19 @@ Executed engine.Stop(ct) taking 60.9244 ms
 Executed engine.Start(ct) taking 1002.506 ms
 Executed engine.Stop(ct) taking 58.2176 ms
 ...
+```
+
+Timespans can be used in order to define how long the operations must take instead of repeating them certain times.
+
+```
+[Fact]
+public Task EngineShouldStartRevAndStopDuringTime()
+    => UseFeatureSetGroup(Time.Minutes(1))
+        .WithSet(group => group.Create().During(Time.Seconds(20))
+            .WithStep(_engineFeature, (engine, ct) => engine.Start(ct))
+            .WithStep(_engineFeature, (engine, ct) => engine.Rev3000(ct))
+            .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct)))
+        .Run();
 ```
 
 Another more complete sample.
