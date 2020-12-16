@@ -25,6 +25,14 @@ namespace FluentEndurance.Samples
                     .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
                 .Run();
 
+        [Fact]
+        public Task EngineShouldStartAndStopDuringTime()
+            => UseFeatureSetGroup(Time.Seconds(30))
+                .WithSet(group => group.Create()
+                    .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Timeout.Being(1200))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
+                .Run();
+
 
         [Fact]
         public Task EngineShouldStartRevAndStop()
@@ -33,6 +41,15 @@ namespace FluentEndurance.Samples
                     .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Timeout.Being(1200))
                     .WithStep(_engineFeature, (engine, ct) => engine.Rev3000(ct))
                     .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
+                .Run();
+
+        [Fact]
+        public Task EngineShouldStartRevAndStopDuringTime()
+            => UseFeatureSetGroup(Time.Minutes(1))
+                .WithSet(group => group.Create().During(Time.Seconds(20))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Start(ct))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Rev3000(ct))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct)))
                 .Run();
 
         public Task InitializeAsync()

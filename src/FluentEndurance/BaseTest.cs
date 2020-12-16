@@ -29,5 +29,10 @@ namespace FluentEndurance
         {
             return _host.Services.GetService<FeatureSetGroup>().For(times);
         }
+
+        protected FeatureSetGroup UseFeatureSetGroup(Time during)
+        {
+            return _host.Services.GetService<FeatureSetGroup>().During(during);
+        }
     }
 }
