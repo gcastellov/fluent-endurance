@@ -18,7 +18,7 @@ namespace FluentEndurance.Samples
         private readonly SteeringFeature _steeringFeature;
 
         public MotionTests(ITestOutputHelper output)
-            : base(services =>
+            : base(_ => { }, services =>
             {
                 var notificationHandler = new StatusNotificationHandler();
                 notificationHandler.Write += output.WriteLine;

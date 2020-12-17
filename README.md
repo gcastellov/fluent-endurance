@@ -18,6 +18,7 @@ public Task EngineShouldStartAndStop()
             .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
         .Run();
 ```
+
 Which outputs:
 ```
 Executed engine.Start(ct) taking 1007.4665 ms
@@ -78,9 +79,14 @@ The library provides a base class *BaseTest* which registers the *IMediator* def
 
 
 ```
-protected BaseTest(Action<IServiceCollection> configureServices)
+protected BaseTest(Action<IConfigurationBuilder> configureApp,  Action<IServiceCollection> configureServices)
 {
     var hostBuilder = new HostBuilder();
+    hostBuilder.ConfigureAppConfiguration(builder =>
+    {
+        configureApp(builder);
+        _configuration = builder.Build();
+    });
 
     hostBuilder.ConfigureServices(collection =>
     {
@@ -103,13 +109,15 @@ There are two ways of collecting notifications:
 ### Live notifications using notification handlers
 ```
 public MotionTests(ITestOutputHelper output)
-    : base(services =>
-    {
-        var notificationHandler = new StatusNotificationHandler();
-        notificationHandler.Write += output.WriteLine;
-        services.AddSingleton<INotificationHandler<StatusNotification>>(notificationHandler);
-        services.AddSingleton<INotificationHandler<PerformanceStatusNotification>>(notificationHandler);
-    })
+    : base(
+        _ => { }, 
+        services =>
+        {
+            var notificationHandler = new StatusNotificationHandler();
+            notificationHandler.Write += output.WriteLine;
+            services.AddSingleton<INotificationHandler<StatusNotification>>(notificationHandler);
+            services.AddSingleton<INotificationHandler<PerformanceStatusNotification>>(notificationHandler);
+        })
 {
     // ...
 }
