@@ -11,7 +11,7 @@ namespace FluentEndurance.Samples
         private readonly ITestOutputHelper _output;
 
         public EngineTests(ITestOutputHelper output)
-            : base(services => {})
+            : base(_ => {}, services => {})
         {
             _output = output;
             _engineFeature = new EngineFeature();
