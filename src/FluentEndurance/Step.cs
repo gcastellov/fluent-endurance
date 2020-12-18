@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentEndurance.Notifications;
 
@@ -7,10 +8,10 @@ namespace FluentEndurance
     public class Step
     {
         private readonly IRule _rule;
-        private readonly int _timeout;
+        private readonly TimeSpan _timeout;
         private readonly Feature _feature;
 
-        public Step(Feature feature, IRule rule, Timeout timeout)
+        public Step(Feature feature, IRule rule, Time timeout)
         {
             _feature = feature;
             _rule = rule;
@@ -21,10 +22,22 @@ namespace FluentEndurance
 
         internal async Task Execute()
         {
-            var cancellationTokenSource = new CancellationTokenSource(_timeout);
-            var task = (Task)_rule.GetMethodInfo().Invoke(_feature, new object[] { cancellationTokenSource.Token });
-            await Task.Run(async () => await task, cancellationTokenSource.Token);
-            cancellationTokenSource.Token.ThrowIfCancellationRequested();
+            var cancellationToken = CancellationToken.None;
+            CancellationTokenSource cancellationTokenSource = null;
+            if (_timeout != TimeSpan.MaxValue)
+            {
+                cancellationTokenSource = new CancellationTokenSource(_timeout);
+                cancellationToken = cancellationTokenSource.Token;
+            }
+
+            var task = (Task)_rule.GetMethodInfo().Invoke(_feature, new object[] {cancellationToken });
+            await Task.Run(async () => await task, cancellationToken);
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                cancellationTokenSource.Dispose();
+            }
         }
 
         internal void AddNotification(PerformanceStatusNotification notification)

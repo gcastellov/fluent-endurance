@@ -35,7 +35,7 @@ namespace FluentEndurance.Samples
 
         [Fact]
         public Task CarShouldMakeItsRoutineTwice()
-            => UseFeatureSetGroup(Times.Being(2))
+            => UseFeatureSetGroup().For(Times.As(2))
                 .WithSet(group => group.Create().As("Warm up")
                     .WithStep(_engineFeature, (engine, ct) => engine.Start(ct))
                     .WithStep(_engineFeature, (engine, ct) => engine.Rev3000(ct)))

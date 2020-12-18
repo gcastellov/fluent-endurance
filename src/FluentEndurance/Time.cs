@@ -2,24 +2,43 @@
 
 namespace FluentEndurance
 {
-    public class Time
+    public abstract class Time
     {
-        public static Time Milliseconds(int ms) => new Time(new TimeSpan(0, 0, 0, ms));
-
-        public static Time Seconds(int seconds) => new Time(new TimeSpan(0, 0, seconds));
-
-        public static Time Minutes(int minutes) => new Time(new TimeSpan(0, minutes, 0));
-
-        public static Time Hours(int hours) => new Time(new TimeSpan(hours, 0, 0));
-
-        public static Time Span(TimeSpan timeSpan) => new Time(timeSpan);
-
-
-        private Time(TimeSpan timeSpan)
+        protected Time(TimeSpan timeSpan)
         {
             Value = timeSpan;
         }
 
         internal TimeSpan Value { get; }
+    }
+
+    public class Span : Time
+    {
+        public static Time As(TimeSpan timeSpan) => new Span(timeSpan);
+
+        private Span(TimeSpan timeSpan)
+            : base(timeSpan)
+        {
+        }
+    }
+
+    public static class Milliseconds
+    {
+        public static Time As(int ms) => Span.As(new TimeSpan(0, 0, 0, ms));
+    }
+
+    public static class Seconds
+    {
+        public static Time As(int seconds) => Span.As(new TimeSpan(0, 0, seconds));
+    }
+
+    public static class Minutes
+    {
+        public static Time As(int minutes) => Span.As(new TimeSpan(0, minutes, 0));
+    }
+
+    public static class Hours
+    {
+        public static Time As(int hours) => Span.As(new TimeSpan(hours, 0, 0));
     }
 }

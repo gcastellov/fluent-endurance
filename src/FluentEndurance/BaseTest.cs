@@ -34,14 +34,9 @@ namespace FluentEndurance
 
         protected IConfigurationRoot Configuration => _configuration;
 
-        protected FeatureSetGroup UseFeatureSetGroup(Times times)
+        protected FeatureSetGroup UseFeatureSetGroup()
         {
-            return _host.Services.GetService<FeatureSetGroup>().For(times);
-        }
-
-        protected FeatureSetGroup UseFeatureSetGroup(Time during)
-        {
-            return _host.Services.GetService<FeatureSetGroup>().During(during);
+            return _host.Services.GetService<FeatureSetGroup>();
         }
     }
 }

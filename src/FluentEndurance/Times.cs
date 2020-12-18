@@ -8,8 +8,7 @@
 
         public static Times Max { get; } = new Times(int.MaxValue);
 
-        public static Times Being(int times) => new Times(times);
-
+        public static Times As(int times) => new Times(times);
 
         private Times(int times)
         {

@@ -45,10 +45,10 @@ namespace FluentEndurance
 
         public FeatureSet WithStep<T>(T feature, Expression<Func<T, CancellationToken, Task>> useCase) where T : Feature
         {
-            return WithStep(feature, useCase, Timeout.Being(int.MaxValue));
+            return WithStep(feature, useCase, Span.As(TimeSpan.MaxValue));
         }
 
-        public FeatureSet WithStep<T>(T feature, Expression<Func<T, CancellationToken, Task>> useCase, Timeout timeout) where T : Feature
+        public FeatureSet WithStep<T>(T feature, Expression<Func<T, CancellationToken, Task>> useCase, Time timeout) where T : Feature
         {
             var rule = new Rule<T>().BindRuleTo(useCase);
             _steps.Add(new Step(feature, rule, timeout));

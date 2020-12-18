@@ -19,34 +19,34 @@ namespace FluentEndurance.Samples
 
         [Fact]
         public Task EngineShouldStartAndStop()
-            => UseFeatureSetGroup(Times.Being(50))
+            => UseFeatureSetGroup().For(Times.As(50))
                 .WithSet(group => group.Create()
-                    .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Timeout.Being(1200))
-                    .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Milliseconds.As(1200))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Milliseconds.As(800)))
                 .Run();
 
         [Fact]
         public Task EngineShouldStartAndStopDuringTime()
-            => UseFeatureSetGroup(Time.Seconds(30))
+            => UseFeatureSetGroup().During(Seconds.As(30))
                 .WithSet(group => group.Create()
-                    .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Timeout.Being(1200))
-                    .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Milliseconds.As(1200))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Milliseconds.As(800)))
                 .Run();
 
 
         [Fact]
         public Task EngineShouldStartRevAndStop()
-            => UseFeatureSetGroup(Times.Being(50))
+            => UseFeatureSetGroup().For(Times.As(50))
                 .WithSet(group => group.Create()
-                    .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Timeout.Being(1200))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Milliseconds.As(1200))
                     .WithStep(_engineFeature, (engine, ct) => engine.Rev3000(ct))
-                    .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
+                    .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Milliseconds.As(800)))
                 .Run();
 
         [Fact]
         public Task EngineShouldStartRevAndStopDuringTime()
-            => UseFeatureSetGroup(Time.Minutes(1))
-                .WithSet(group => group.Create().During(Time.Seconds(20))
+            => UseFeatureSetGroup().During(Minutes.As(1))
+                .WithSet(group => group.Create().During(Seconds.As(20))
                     .WithStep(_engineFeature, (engine, ct) => engine.Start(ct))
                     .WithStep(_engineFeature, (engine, ct) => engine.Rev3000(ct))
                     .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct)))
