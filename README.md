@@ -13,10 +13,10 @@ In the following snippet the engine must start within 1200 ms and stop within 80
 ```
 [Fact]
 public Task EngineShouldStartAndStop()
-    => UseFeatureSetGroup(Times.Being(50))
+    => UseFeatureSetGroup().For(Times.As(50))
         .WithSet(group => group.Create()
-            .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Timeout.Being(1200))
-            .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Timeout.Being(800)))
+            .WithStep(_engineFeature, (engine, ct) => engine.Start(ct), Milliseconds.As(1200))
+            .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct), Milliseconds.As(800)))
         .Run();
 ```
 
@@ -34,8 +34,8 @@ Timespans can be used in order to define how long the operations must take inste
 ```
 [Fact]
 public Task EngineShouldStartRevAndStopDuringTime()
-    => UseFeatureSetGroup(Time.Minutes(1))
-        .WithSet(group => group.Create().During(Time.Seconds(20))
+    => UseFeatureSetGroup().During(Minutes.As(1))
+        .WithSet(group => group.Create().During(Seconds.As(20))
             .WithStep(_engineFeature, (engine, ct) => engine.Start(ct))
             .WithStep(_engineFeature, (engine, ct) => engine.Rev3000(ct))
             .WithStep(_engineFeature, (engine, ct) => engine.Stop(ct)))
@@ -47,7 +47,7 @@ Another more complete sample.
 ```
 [Fact]
 public Task CarShouldMakeItsRoutineTwice()
-    => UseFeatureSetGroup(Times.Being(2))
+    => UseFeatureSetGroup().For(Times.As(2))
         .WithSet(group => group.Create().As("Warm up")
             .WithStep(_engineFeature, (engine, ct) => engine.Start(ct))
             .WithStep(_engineFeature, (engine, ct) => engine.Rev3000(ct)))
