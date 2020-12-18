@@ -1,8 +1,8 @@
 ![.NET Core](https://github.com/gcastellov/fluent-endurance/workflows/.NET%20Core/badge.svg)
 ![Publish NuGet](https://github.com/gcastellov/fluent-endurance/workflows/Publish%20NuGet/badge.svg?branch=main&event=push)
 
-# fluent-endurance
-A fluent endurance automation framework.
+# FluentEndurance
+A fluent endurance automation framework whose API helps you to fluently create your endurance tests defining repetitions and timeouts. 
 
 
 ## Samples
@@ -136,3 +136,7 @@ public Task DisposeAsync()
     return Task.CompletedTask;
 }
 ```
+
+## License
+This project is licensed under the terms of the MIT license. 
+Check the [LICENSE](LICENSE.md) file out for license rights and limitations.
