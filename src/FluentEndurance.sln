@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEndurance", "FluentEndurance\FluentEndurance.csproj", "{3CD5AE97-8754-448D-961D-9AE9509A4F2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEndurance.Samples", "FluentEndurance.Samples\FluentEndurance.Samples.csproj", "{B62F3CBD-4181-4D6C-9DD4-340411C8A512}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEndurance.Samples", "FluentEndurance.Samples\FluentEndurance.Samples.csproj", "{B62F3CBD-4181-4D6C-9DD4-340411C8A512}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEndurance.Tests", "..\test\FluentEndurance.Tests\FluentEndurance.Tests.csproj", "{189E585D-E806-48DC-B547-F51CBE9EDDA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B62F3CBD-4181-4D6C-9DD4-340411C8A512}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B62F3CBD-4181-4D6C-9DD4-340411C8A512}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B62F3CBD-4181-4D6C-9DD4-340411C8A512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189E585D-E806-48DC-B547-F51CBE9EDDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189E585D-E806-48DC-B547-F51CBE9EDDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189E585D-E806-48DC-B547-F51CBE9EDDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189E585D-E806-48DC-B547-F51CBE9EDDA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

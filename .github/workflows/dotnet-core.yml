@@ -21,5 +21,7 @@ jobs:
       run: dotnet restore ./src/FluentEndurance.sln
     - name: Build
       run: dotnet build --configuration Release --no-restore ./src/FluentEndurance.sln
-    - name: Test
+    - name: Test samples
       run: dotnet test --no-restore --verbosity normal ./src/FluentEndurance.Samples/FluentEndurance.Samples.csproj
+    - name: Test unit tests
+      run: dotnet test --no-restore --verbosity normal ./test/FluentEndurance.Tests/FluentEndurance.Tests.csproj

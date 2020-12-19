@@ -24,21 +24,21 @@ namespace FluentEndurance
 
     public static class Milliseconds
     {
-        public static Time As(int ms) => Span.As(new TimeSpan(0, 0, 0, ms));
+        public static Time As(int ms) => Span.As(new TimeSpan(0, 0, 0, 0, ms));
     }
 
     public static class Seconds
     {
-        public static Time As(int seconds) => Span.As(new TimeSpan(0, 0, seconds));
+        public static Time As(int seconds) => Span.As(new TimeSpan(0, 0, 0, seconds));
     }
 
     public static class Minutes
     {
-        public static Time As(int minutes) => Span.As(new TimeSpan(0, minutes, 0));
+        public static Time As(int minutes) => Span.As(new TimeSpan(0, 0, minutes, 0));
     }
 
     public static class Hours
     {
-        public static Time As(int hours) => Span.As(new TimeSpan(hours, 0, 0));
+        public static Time As(int hours) => Span.As(new TimeSpan(0, hours, 0, 0));
     }
 }
