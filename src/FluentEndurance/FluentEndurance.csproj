@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/gcastellov/fluent-endurance</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>endurance automation netstandard21 testing</PackageTags>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
