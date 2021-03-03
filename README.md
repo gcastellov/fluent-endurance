@@ -10,7 +10,7 @@ For the sake of providing some examples, the solution contains set of tests whic
 
 In the following snippet the engine must start within 1200 ms and stop within 800 ms. If any of these two operation reach the timing the execution fails. This set of operations will repeat for 50 times. 
 
-```
+```csharp
 [Fact]
 public Task EngineShouldStartAndStop()
     => UseFeatureSetGroup().For(Times.As(50))
@@ -31,7 +31,7 @@ Executed engine.Stop(ct) taking 58.2176 ms
 
 Timespans can be used in order to define how long the operations must take instead of repeating them certain times.
 
-```
+```csharp
 [Fact]
 public Task EngineShouldStartRevAndStopDuringTime()
     => UseFeatureSetGroup().During(Minutes.As(1))
@@ -44,7 +44,7 @@ public Task EngineShouldStartRevAndStopDuringTime()
 
 Another more complete sample.
 
-```
+```csharp
 [Fact]
 public Task CarShouldMakeItsRoutineTwice()
     => UseFeatureSetGroup().For(Times.As(2))
@@ -79,7 +79,7 @@ This library depends on *IMediator* for triggering events in order to provide ce
 The library provides a base class *BaseTest* which registers the *IMediator* default implementation and also provides a helper method to easly start defining the tests. Nonetheless, is up to you whether use this class or implement yours depending on your needs.
 
 
-```
+```csharp
 protected BaseTest(Action<IConfigurationBuilder> configureApp,  Action<IServiceCollection> configureServices)
 {
     var hostBuilder = new HostBuilder();
@@ -108,7 +108,7 @@ There are two ways of collecting notifications:
 
 
 ### Live notifications using notification handlers
-```
+```csharp
 public MotionTests(ITestOutputHelper output)
     : base(
         _ => { }, 
@@ -125,7 +125,7 @@ public MotionTests(ITestOutputHelper output)
 ```
 
 ### Reading feature events
-```
+```csharp
 public Task DisposeAsync()
 {
     foreach (var notification in _engineFeature.Notifications)
