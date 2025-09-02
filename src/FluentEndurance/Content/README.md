@@ -2,7 +2,6 @@
 # FluentEndurance
 A fluent endurance automation framework whose API helps you to fluently create your endurance tests defining repetitions and timeouts. 
 
-![FluentEndurance](img/logo512x512.png)
 
 ## Samples
 For the sake of providing some examples, the solution contains set of tests which simulates certain car features.
@@ -107,7 +106,3 @@ public Task DisposeAsync()
     return Task.CompletedTask;
 }
 ```
-
-## License
-This project is licensed under the terms of the MIT license. 
-Check the [LICENSE](LICENSE.md) file out for license rights and limitations.

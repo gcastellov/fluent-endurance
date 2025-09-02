@@ -1,42 +1,31 @@
 ﻿using System;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace FluentEndurance
 {
     public abstract class BaseTest
     {
-        private readonly IHost _host;
-        private IConfigurationRoot _configuration;
+        private readonly IConfigurationRoot _configuration;
+        private readonly IServiceProvider _serviceProvider;
 
-        protected BaseTest(Action<IConfigurationBuilder> configureApp,  Action<IServiceCollection> configureServices)
+        protected BaseTest(Action<IConfigurationBuilder> configureApp, Action<IServiceCollection> configureServices)
         {
-            var hostBuilder = new HostBuilder();
-            hostBuilder.ConfigureAppConfiguration(builder =>
-            {
-                configureApp(builder);
-                _configuration = builder.Build();
-            });
-
-            hostBuilder.ConfigureServices(collection =>
-            {
-                collection.AddScoped<FeatureSetGroup>();
-                collection.AddSingleton<IMediator>(sp => new Mediator(sp.GetService));
-                configureServices(collection);
-            });
-
-            _host = hostBuilder.Build();
+            var configBuilder = new ConfigurationBuilder();
+            var services = new ServiceCollection()
+                .AddLogging()
+                .AddScoped<FeatureSetGroup>()
+                .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(this.GetType().Assembly));
+            
+            configureServices(services);
+            configureApp(configBuilder);
+            
+            _configuration = configBuilder.Build();
+            _serviceProvider = services.BuildServiceProvider();
         }
-
-        protected IHost Host => _host;
 
         protected IConfigurationRoot Configuration => _configuration;
 
-        protected FeatureSetGroup UseFeatureSetGroup()
-        {
-            return _host.Services.GetService<FeatureSetGroup>();
-        }
+        protected FeatureSetGroup UseFeatureSetGroup() => _serviceProvider.GetRequiredService<FeatureSetGroup>();
     }
 }

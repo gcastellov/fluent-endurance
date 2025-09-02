@@ -1,21 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 	<NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Gerard Castello</Authors>
-    <Company />
-    <Product />
     <Description>A fluent endurance automation framework</Description>
     <RepositoryUrl>https://github.com/gcastellov/fluent-endurance</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>endurance automation netstandard21 testing</PackageTags>
-    <Version>1.2.1</Version>
+    <PackageTags>endurance automation testing</PackageTags>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageIcon>Content/logo.png</PackageIcon>
+	<PackageReadmeFile>Content/README.md</PackageReadmeFile>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="MediatR" Version="13.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Include="Content/logo.png">
+		<Pack>True</Pack>
+		<PackagePath>\Content</PackagePath>
+	</None>
+	<None Include="Content/README.md">
+		<Pack>True</Pack>
+		<PackagePath>\Content</PackagePath>
+	</None>
   </ItemGroup>
 
 </Project>
