@@ -2,6 +2,7 @@
 # FluentEndurance
 A fluent endurance automation framework whose API helps you to fluently create your endurance tests defining repetitions and timeouts. 
 
+![FluentEndurance](img/logo512x512.png)
 
 ## Samples
 For the sake of providing some examples, the solution contains set of tests which simulates certain car features.
