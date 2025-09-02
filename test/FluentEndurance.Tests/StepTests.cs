@@ -46,7 +46,7 @@ namespace FluentEndurance.Tests
 
             Func<Task> action = async () => await step.Execute();
 
-            action.Should().Throw<OperationCanceledException>();
+            action.Should().ThrowAsync<OperationCanceledException>();
         }
     }
 }

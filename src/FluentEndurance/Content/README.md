@@ -106,7 +106,3 @@ public Task DisposeAsync()
     return Task.CompletedTask;
 }
 ```
-
-## License
-This project is licensed under the terms of the MIT license. 
-Check the [LICENSE](LICENSE.md) file out for license rights and limitations.
